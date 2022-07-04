@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "350253273869",
+    "project_id": "haivc-5e7ca",
+    "storage_bucket": "haivc-5e7ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350253273869:android:66d6fb675d69eee3fb1644",
+        "android_client_info": {
+          "package_name": "com.example.haivc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350253273869-a9n68sjde50oemqiahsvb4asem75e18f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcwoQeqvgw7AwgQYFjPr7PSUQnFWNbB6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350253273869-a9n68sjde50oemqiahsvb4asem75e18f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
