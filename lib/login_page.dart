@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'sign_up_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -13,6 +14,8 @@ class Login extends StatelessWidget {
 class LoginState extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final String EMAIL_KEY = "EMAIL_KEY";
+  final String PASSWORD_KEY = "PASSWORD_KEY";
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +114,9 @@ class LoginState extends StatelessWidget {
                                     side: BorderSide(color: Colors.orange)))),
                     onPressed: () {
                       print("ban vua bam dang ki");
+                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => SignUp()));
                     }),
               ],
             ),
@@ -119,8 +125,12 @@ class LoginState extends StatelessWidget {
   }
 
   Future logIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(EMAIL_KEY, email);
+    await prefs.setString(PASSWORD_KEY, password);
   }
 }

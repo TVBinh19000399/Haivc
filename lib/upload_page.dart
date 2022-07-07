@@ -90,18 +90,8 @@ class _UploadPageState extends State<UploadPage> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      FlutterLogo(
-                                        size: 120,
-                                      ),
-                                      FlutterLogo(
-                                        size: 120,
-                                      ),
-                                      FlutterLogo(
-                                        size: 120,
-                                      ),
-                                      FlutterLogo(
-                                        size: 120,
-                                      ),
+                                      Text(
+                                          "To make sure only the best help with chemistry homework is provided and you receive a unique assignment, we treat each project on an individual basis. It means that we don’t store or sell pre-written material, nor do we keep databases of previously published projects, so rest assured you won’t be accused of plagiarism. Additionally, each completed assignment is delivered directly to your e-mail inbox, ensuring that you are the only person who knows about the purchase of a chemistry assignment from AssignmentGeek.com. Moreover, our native English speaking writers will sample your own writing style to make the piece as close to your own as possible. This is our promise and the reason why we are the preferred choice for homework assistance."),
                                     ],
                                   ),
                                 ),

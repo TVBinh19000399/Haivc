@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haivc/upload_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'baidang_item.dart';
 import 'news_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,9 @@ import 'main.dart';
 import 'login_page.dart';
 
 final cruser = FirebaseAuth.instance.currentUser;
+bool isLogined = true;
+final String EMAIL_KEY = "EMAIL_KEY";
+final String PASSWORD_KEY = "PASSWORD_KEY";
 
 class PageChanging extends StatefulWidget {
   @override
@@ -70,8 +74,6 @@ class _PageChangingState extends State<PageChanging> {
     );
   }
 }
-
-bool isLogined = true;
 
 class NavigationDrawer extends StatelessWidget {
   @override
@@ -173,6 +175,7 @@ class NavigationDrawer extends StatelessWidget {
               leading: Icon(Icons.home_outlined),
               title: Text("Home"),
               onTap: () {
+                FirebaseAuth.instance.signOut();
                 print("Ban vua chuyen sang Home!");
               },
             ),
@@ -193,14 +196,18 @@ class NavigationDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.home_outlined),
-              title: Text("Dang xuat"),
+              leading: isLogined ? Icon(Icons.logout) : Icon(Icons.login),
+              title: isLogined ? Text("Dang xuat") : Text("Dang nhap"),
               onTap: () {
-                print("Vua tap vao dang xuat!");
-                FirebaseAuth.instance.signOut();
-                // Navigator.pop(context);
-                // Navigator.of(context).push(
-                //     MaterialPageRoute(builder: (context) => Login()));
+                if (isLogined) {
+                  print("Vua tap vao dang xuat!");
+                  FirebaseAuth.instance.signOut();
+                } else {
+                  print("Ban vua an vao dang nhap!");
+                  Navigator.pop(context);
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Login()));
+                }
               },
             ),
             Divider(
@@ -219,9 +226,14 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.question_mark),
               title: Text("Help"),
-              onTap: () {
+              onTap: () async { //////////////////////////////////can duoc xu ly////////////////
                 print("Thong tin cua user hien tai:");
                 print("Email: " + (cruser?.email).toString());
+                print("Thong tin doc tu SP");
+                final prefs = await SharedPreferences.getInstance();
+                print("Email: ${prefs.getString(EMAIL_KEY)}");
+                print("Password: ${prefs.getString(PASSWORD_KEY)}");
+                print("Kiem tra current user: ${await FirebaseAuth.instance.currentUser! }");
               },
             ),
             ListTile(

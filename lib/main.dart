@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:haivc/UserRepository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:haivc/sharedpreference.dart';
 import 'package:haivc/thu.dart';
 import 'package:haivc/upload_page.dart';
 import 'baidang.dart';
@@ -18,6 +19,7 @@ import 'info_user.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // FirebaseAuth.instance.signOut();
   runApp(HaivcApp());
 }
 
@@ -35,6 +37,7 @@ class MainPage extends StatelessWidget {
       builder: (contex, snapshot) {
         if (snapshot.hasData) {
           print("Dang nhap thanh cong");
+          print("Snapshot: "+snapshot.toString());
           return PageChanging();
         } else {
           print("Thong tin dang nhap khong chinh xac");
@@ -46,16 +49,14 @@ class MainPage extends StatelessWidget {
 }
 
 class HaivcApp extends StatelessWidget {
-  bool isLogined = true;
 
   @override
   Widget build(BuildContext context) {
     //full app
-    return MaterialApp(
-      title: 'Hai vc',
-      home: PageChanging(),
-    );
-
+    // return MaterialApp(
+    //   title: 'Hai vc',
+    //   home: PageChanging(),
+    // );
 
 
     // giao dien dang nhap, dang ki
@@ -89,15 +90,22 @@ class HaivcApp extends StatelessWidget {
     // return MaterialApp(home: TestState(),);
 
     //giao dien phan thong tin ca nhan
-    return MaterialApp(home: UserInfos(),);
+    // return MaterialApp(home: UserInfos(),);
 
     //giao dien trang upload page
-    // return MaterialApp(home: UploadPage(),);
+    return MaterialApp(home: UploadPage(),);
 
     //chuc nang login, ok
     // return MaterialApp(home: MainPage());
 
     //chuc nang dang ki, ok
     // return MaterialApp(home: SignUp());
+
+    //test chuc nang shared preference, ok
+    // return MaterialApp(home: SharedPrefer());
+
+    //test chuc nang thu
+    return MaterialApp(home: HomePage());
+
   }
 }

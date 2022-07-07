@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "350253273869",
+    "firebase_url": "https://haivc-5e7ca-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "haivc-5e7ca",
     "storage_bucket": "haivc-5e7ca.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "350253273869-30c80582tsj174u0l7qpun8mongv5bdj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haivc",
+            "certificate_hash": "2395f99f7484c4747ce13a081ea7a820fea929e7"
+          }
+        },
         {
           "client_id": "350253273869-a9n68sjde50oemqiahsvb4asem75e18f.apps.googleusercontent.com",
           "client_type": 3

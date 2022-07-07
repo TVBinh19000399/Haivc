@@ -1,6 +1,30 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ListComments extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ListComments extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ListCommentsState();
+  }
+}
+
+class _ListCommentsState extends State<ListComments> {
+  File? image;
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+    } on PlatformException catch (e) {
+      print("Khong the chon hinh anh");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,19 +72,39 @@ class ListComments extends StatelessWidget {
                 children: [
                   //bottom items
                   Expanded(
-                    child: Icon(Icons.camera_alt),
+                    child: IconButton(
+                      icon: Icon(Icons.camera_alt),
+                      onPressed: () {
+                        print("ban vua an vao camera");
+                        pickImage();
+                      },
+                    ),
                     flex: 1,
                   ),
                   Expanded(
-                    child: Icon(Icons.face),
+                    child: IconButton(
+                      icon: Icon(Icons.attach_file_sharp),
+                      onPressed: () {
+                        print("ban vua an vao select file");
+                      },
+                    ),
+                    flex: 1,
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(Icons.tag_faces),
+                      onPressed: () {
+                        print("ban vua an vao icon face");
+                      },
+                    ),
                     flex: 1,
                   ),
                   Expanded(
                     child: Container(
+                      padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
                       height: 40,
                       child: TextField(
                         decoration: InputDecoration(
-                          icon: Icon(Icons.person),
                           hintText: 'Viet tin nhan...',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(24),
@@ -74,7 +118,12 @@ class ListComments extends StatelessWidget {
                     flex: 7,
                   ),
                   Expanded(
-                    child: Icon(Icons.send),
+                    child: IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () {
+                        print("ban vua an vao send");
+                      },
+                    ),
                     flex: 1,
                   ),
                 ],
